@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 
 interface Question {
   type: string
@@ -27,7 +27,6 @@ const PRAISE = ['🎉 Excellent!', '⭐ Correct!', '🔥 Amazing!', '✅ Well do
 function NumberBar({ numbers }: { numbers: number[] }) {
   if (!numbers.length) return null
   const sum = numbers.reduce((a, b) => a + b, 0)
-  const avg = sum / numbers.length
   return (
     <div style={{
       background: '#101c50', borderRadius: 14, padding: '14px 16px',
