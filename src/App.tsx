@@ -9,10 +9,11 @@ import QuizShooterGame from './components/QuizShooterGame'
 import MathObbyTower from './components/MathObbyTower'
 import TugOfWarMathGame from './games/tug-of-war/TugOfWarMathGame'
 import LineGraphQuest from './components/LineGraphQuest'
+import AverageQuest from './components/AverageQuest'
 
 const MathObbyGame = lazy(() => import('./components/MathObbyGame'))
 
-type GameKey = 'obby' | 'obby-tower' | 'sprint' | 'fraction' | 'snake' | 'shooter' | 'tug' | 'line-graph'
+type GameKey = 'obby' | 'obby-tower' | 'sprint' | 'fraction' | 'snake' | 'shooter' | 'tug' | 'line-graph' | 'average'
 type Stage = 'login' | 'select' | 'play'
 
 const GAME_PASSWORD = import.meta.env.VITE_GAMES_PASSWORD || 'ignite123'
@@ -26,6 +27,7 @@ const GAME_META: Record<GameKey, { title: string; desc: string; color: string }>
   shooter: { title: 'Quiz Shooter', desc: 'Shoot the correct answer balloon.', color: 'linear-gradient(135deg, #f97316, #e11d48)' },
   tug: { title: 'Tug of War Math', desc: '2-player realtime rope battle with shared questions.', color: 'linear-gradient(135deg, #d946ef, #7e22ce)' },
   'line-graph': { title: 'Line Graph Quest (G3)', desc: 'Read line graphs and answer quick trend questions.', color: 'linear-gradient(135deg, #0ea5e9, #2563eb)' },
+  average: { title: 'Average Quest (G5)', desc: 'Solve average questions with speed + streak bonus.', color: 'linear-gradient(135deg, #14b8a6, #0f766e)' },
 }
 
 function App() {
@@ -35,7 +37,7 @@ function App() {
   const [error, setError] = useState('')
 
   const gameList = useMemo(() => Object.keys(GAME_META) as GameKey[], [])
-  const topicGames = useMemo(() => (['line-graph', 'sprint', 'fraction', 'snake', 'shooter', 'tug'] as GameKey[]), [])
+  const topicGames = useMemo(() => (['average', 'line-graph', 'sprint', 'fraction', 'snake', 'shooter', 'tug'] as GameKey[]), [])
 
   const onLogin = (e: FormEvent) => {
     e.preventDefault()
@@ -72,6 +74,7 @@ function App() {
     if (selected === 'shooter') return <QuizShooterGame />
     if (selected === 'tug') return <TugOfWarMathGame />
     if (selected === 'line-graph') return <LineGraphQuest />
+    if (selected === 'average') return <AverageQuest />
     return null
   }
 
