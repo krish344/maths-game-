@@ -32,7 +32,8 @@ function App() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
-  const gameList = useMemo(() => Object.keys(GAME_META) as GameKey[], [])
+  const featuredGames = useMemo(() => (['obby', 'obby-tower'] as GameKey[]), [])
+  const topicGames = useMemo(() => (['sprint', 'fraction', 'snake', 'shooter', 'tug'] as GameKey[]), [])
 
   const onLogin = (e: FormEvent) => {
     e.preventDefault()
@@ -114,7 +115,7 @@ function App() {
           <div style={{ display: 'grid', gap: 8, marginBottom: 10 }}>
             <p style={{ margin: 0, fontWeight: 800, color: '#334155' }}>Featured obby games</p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-              {(['obby', 'obby-tower'] as GameKey[]).map((key) => (
+              {featuredGames.map((key) => (
                 <button
                   key={`featured-${key}`}
                   className="game-card"
@@ -131,25 +132,28 @@ function App() {
             </div>
           </div>
 
-          <div className="game-grid">
-            {gameList.map((key) => (
-              <button
-                key={key}
-                className="game-card"
-                onClick={() => {
-                  setSelected(key)
-                  setStage('play')
-                }}
-                style={{
-                  color: '#fff',
-                  border: 'none',
-                  background: GAME_META[key].color,
-                }}
-              >
-                <strong>{GAME_META[key].title}</strong>
-                <span style={{ color: 'rgba(255,255,255,0.9)' }}>{GAME_META[key].desc}</span>
-              </button>
-            ))}
+          <div style={{ display: 'grid', gap: 8 }}>
+            <p style={{ margin: 0, fontWeight: 800, color: '#334155' }}>Other games (Topic Games)</p>
+            <div className="game-grid">
+              {topicGames.map((key) => (
+                <button
+                  key={key}
+                  className="game-card"
+                  onClick={() => {
+                    setSelected(key)
+                    setStage('play')
+                  }}
+                  style={{
+                    color: '#fff',
+                    border: 'none',
+                    background: GAME_META[key].color,
+                  }}
+                >
+                  <strong>{GAME_META[key].title}</strong>
+                  <span style={{ color: 'rgba(255,255,255,0.9)' }}>{GAME_META[key].desc}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </section>
       </main>
