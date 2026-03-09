@@ -8,10 +8,11 @@ import MathSprint from './components/MathSprint'
 import QuizShooterGame from './components/QuizShooterGame'
 import MathObbyTower from './components/MathObbyTower'
 import TugOfWarMathGame from './games/tug-of-war/TugOfWarMathGame'
+import LineGraphQuest from './components/LineGraphQuest'
 
 const MathObbyGame = lazy(() => import('./components/MathObbyGame'))
 
-type GameKey = 'obby' | 'obby-tower' | 'sprint' | 'fraction' | 'snake' | 'shooter' | 'tug'
+type GameKey = 'obby' | 'obby-tower' | 'sprint' | 'fraction' | 'snake' | 'shooter' | 'tug' | 'line-graph'
 type Stage = 'login' | 'select' | 'play'
 
 const GAME_PASSWORD = import.meta.env.VITE_GAMES_PASSWORD || 'ignite123'
@@ -24,6 +25,7 @@ const GAME_META: Record<GameKey, { title: string; desc: string; color: string }>
   snake: { title: 'Math Snake', desc: 'Eat the correct answer block to grow.', color: 'linear-gradient(135deg, #84cc16, #15803d)' },
   shooter: { title: 'Quiz Shooter', desc: 'Shoot the correct answer balloon.', color: 'linear-gradient(135deg, #f97316, #e11d48)' },
   tug: { title: 'Tug of War Math', desc: '2-player realtime rope battle with shared questions.', color: 'linear-gradient(135deg, #d946ef, #7e22ce)' },
+  'line-graph': { title: 'Line Graph Quest (G3)', desc: 'Read line graphs and answer quick trend questions.', color: 'linear-gradient(135deg, #0ea5e9, #2563eb)' },
 }
 
 function App() {
@@ -33,7 +35,7 @@ function App() {
   const [error, setError] = useState('')
 
   const gameList = useMemo(() => Object.keys(GAME_META) as GameKey[], [])
-  const topicGames = useMemo(() => (['sprint', 'fraction', 'snake', 'shooter', 'tug'] as GameKey[]), [])
+  const topicGames = useMemo(() => (['line-graph', 'sprint', 'fraction', 'snake', 'shooter', 'tug'] as GameKey[]), [])
 
   const onLogin = (e: FormEvent) => {
     e.preventDefault()
@@ -69,6 +71,7 @@ function App() {
     if (selected === 'snake') return <MathSnakeGame />
     if (selected === 'shooter') return <QuizShooterGame />
     if (selected === 'tug') return <TugOfWarMathGame />
+    if (selected === 'line-graph') return <LineGraphQuest />
     return null
   }
 
